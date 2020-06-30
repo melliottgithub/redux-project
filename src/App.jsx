@@ -1,0 +1,17 @@
+import React from "react";
+import Pokemones from "./components/Pokemones";
+
+import { Provider } from "react-redux";
+import generateStore from "./redux/pokeDucks";
+
+function App() {
+  const store = generateStore();
+
+  return (
+    <Provider store ={store}>
+      <Pokemones></Pokemones>
+    </Provider>
+  );
+}
+
+export default App;
