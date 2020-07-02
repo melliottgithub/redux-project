@@ -10,6 +10,7 @@ const dataInicial = {
 const LOADING = "LOADING";
 const USUARIO_ERROR = "USUARIO_ERROR";
 const USUARIO_EXITO = "USUARIO_EXITO";
+const CERRAR_SESION = "CERRAR_SESION";
 //reducer
 export default function usuarioReducer(state = dataInicial, action) {
   switch (action.type) {
@@ -18,7 +19,9 @@ export default function usuarioReducer(state = dataInicial, action) {
     case USUARIO_ERROR:
       return { ...dataInicial };
     case USUARIO_EXITO:
-      return { ...state, loading: false, user: action.payload };
+      return { ...state, loading: false, user: action.payload, activo: true };
+      case CERRAR_SESION:
+      return { ...dataInicial };
     default:
       return { ...state };
   }
@@ -54,11 +57,18 @@ export const ingresoUsuarioAccion = () => async (dispatch) => {
     });
   }
 };
-export const leerUsuarioActivoAccion = () => async (dispatch) => { 
-    if (localStorage.getItem('usuario')) {
-        dispatch({
-            type: USUARIO_EXITO,
-            payload: JSON.parse(localStorage.getItem('usuario'))
-        })
-    }
-}
+export const leerUsuarioActivoAccion = () => async (dispatch) => {
+  if (localStorage.getItem("usuario")) {
+    dispatch({
+      type: USUARIO_EXITO,
+      payload: JSON.parse(localStorage.getItem("usuario")),
+    });
+  }
+};
+export const cerrarSesionAccion = () => async (dispatch) => {
+  auth.signOut()
+    localStorage.removeItem('usuario')
+    dispatch({
+        type: CERRAR_SESION
+    })
+};

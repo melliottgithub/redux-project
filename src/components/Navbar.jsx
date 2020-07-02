@@ -1,4 +1,10 @@
 import React from "react";
+
+import { withRouter } from "react-router-dom";
+
+import { useDispatch } from "react-redux";
+import { cerrarSesionAccion } from "../redux/usuarioDucks";
+
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -19,7 +25,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Navbar() {
+function Navbar(props) {
+  const dispatch = useDispatch();
+
+  const cerrarSesion = () => {
+    dispatch(cerrarSesionAccion());
+    props.history.push("/login");
+  };
+
   const classes = useStyles();
 
   return (
@@ -29,13 +42,13 @@ export default function Navbar() {
           <Typography variant="h6" className={classes.title}>
             <Button color="inherit">Pokemon App</Button>
           </Typography>
-          <Button component={Link} to="/" color="inherit" >
+          <Button component={Link} to="/" color="inherit">
             Inicio
           </Button>
           <Button component={Link} to="/login" color="inherit">
             Login
           </Button>
-          <Button component={Link} to="/login" color="inherit">
+          <Button onClick={() => cerrarSesion()} color="inherit">
             Cerrar Sesion
           </Button>
         </Toolbar>
@@ -43,3 +56,5 @@ export default function Navbar() {
     </div>
   );
 }
+
+export default withRouter(Navbar);
