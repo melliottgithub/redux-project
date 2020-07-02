@@ -1,8 +1,21 @@
 import React, { Fragment } from "react";
-import { Link } from "react-router-dom";
-import { Button, Typography, Box } from "@material-ui/core";
+// import { Link } from "react-router-dom";
 
-const Login = () => {
+import { useDispatch } from "react-redux";
+
+import { Button, Typography, Box, makeStyles } from "@material-ui/core";
+import { ingresoUsuarioAccion } from "../redux/usuarioDucks";
+
+const useStyles = makeStyles((theme) => ({
+  Button: {
+    marginTop: theme.spacing(2),
+  },
+}));
+
+const Login = (props) => {
+  const dispatch = useDispatch();
+  const classes = useStyles();
+
   return (
     <Fragment>
       <Box display="flex" justifyContent="center" borderBottom={1}>
@@ -10,9 +23,10 @@ const Login = () => {
       </Box>
       <Box display="flex" justifyContent="center">
         <Button
-          align
-          component={Link}
-          to="/"
+          onClick={() => dispatch(ingresoUsuarioAccion())}
+          className={classes.Button}
+        //   component={Link}
+        //   to="/"
           color="primary"
           variant="contained"
         >
