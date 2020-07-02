@@ -56,39 +56,6 @@ const Pokemones = (props) => {
         <Grid item xs={6}>
           <Paper className={classes.paper}>
             <Typography variant="h4">Lista de Pokemones</Typography> <br />
-            {pokemones.length === 0 && (
-              <Button
-                className={classes.button}
-                variant="contained"
-                color="primary"
-                size="large"
-                onClick={() => dispatch(obtenerPokemonesAccion())}
-              >
-                Get Pokemones
-              </Button>
-            )}
-            {next && (
-              <Button
-                className={classes.button}
-                variant="contained"
-                color="primary"
-                size="large"
-                onClick={() => dispatch(siguientePokemonAccion())}
-              >
-                siguientes
-              </Button>
-            )}
-            {previous && (
-              <Button
-                className={classes.button}
-                variant="contained"
-                color="primary"
-                size="large"
-                onClick={() => dispatch(anteriorPokemonAccion())}
-              >
-                anteriores
-              </Button>
-            )}
             <List>
               {pokemones.map((item, index) => (
                 <ListItem
@@ -118,6 +85,39 @@ const Pokemones = (props) => {
           </Paper>
         </Grid>
       </Grid>
+      {pokemones.length === 0 && (
+        <Button
+          className={classes.button}
+          variant="contained"
+          color="primary"
+          size="large"
+          onClick={() => dispatch(obtenerPokemonesAccion())}
+        >
+          Get Pokemones
+        </Button>
+      )}
+      {next && (
+        <Button
+          className={classes.button}
+          variant="contained"
+          color="primary"
+          size="large"
+          onClick={() => dispatch(siguientePokemonAccion())}
+        >
+          siguientes
+        </Button>
+      )}
+      {previous && (
+        <Button
+          className={classes.button}
+          variant="contained"
+          color="primary"
+          size="large"
+          onClick={() => dispatch(anteriorPokemonAccion())}
+        >
+          anteriores
+        </Button>
+      )}
     </div>
   );
 };

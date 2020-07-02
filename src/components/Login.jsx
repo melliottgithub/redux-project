@@ -35,8 +35,6 @@ const Login = (props) => {
           disabled={loading}
           onClick={() => dispatch(ingresoUsuarioAccion())}
           className={classes.Button}
-          //   component={Link}
-          //   to="/"
           color="primary"
           variant="contained"
         >

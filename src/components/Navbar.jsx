@@ -1,8 +1,8 @@
-import React from "react";
+import React, { Fragment } from "react";
 
 import { withRouter } from "react-router-dom";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { cerrarSesionAccion } from "../redux/usuarioDucks";
 
 import { makeStyles } from "@material-ui/core/styles";
@@ -27,13 +27,13 @@ const useStyles = makeStyles((theme) => ({
 
 function Navbar(props) {
   const dispatch = useDispatch();
+  const classes = useStyles();
+  const activo = useSelector((store) => store.usuario.activo);
 
   const cerrarSesion = () => {
     dispatch(cerrarSesionAccion());
     props.history.push("/login");
   };
-
-  const classes = useStyles();
 
   return (
     <div className={classes.root}>
@@ -42,15 +42,20 @@ function Navbar(props) {
           <Typography variant="h6" className={classes.title}>
             <Button color="inherit">Pokemon App</Button>
           </Typography>
-          <Button component={Link} to="/" color="inherit">
-            Inicio
-          </Button>
-          <Button component={Link} to="/login" color="inherit">
-            Login
-          </Button>
-          <Button onClick={() => cerrarSesion()} color="inherit">
-            Cerrar Sesion
-          </Button>
+          {activo ? (
+            <Fragment>
+              <Button component={Link} to="/" color="inherit">
+                Inicio
+              </Button>
+              <Button onClick={() => cerrarSesion()} color="inherit">
+                Cerrar Sesion
+              </Button>
+            </Fragment>
+          ) : (
+            <Button component={Link} to="/login" color="inherit">
+              Login
+            </Button>
+          )}
         </Toolbar>
       </AppBar>
     </div>
