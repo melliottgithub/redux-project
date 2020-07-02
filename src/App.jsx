@@ -4,11 +4,11 @@ import Pokemones from "./components/Pokemones";
 import { Provider } from "react-redux";
 import generateStore from "./redux/store";
 
-function App() {
+function App(props) {
   const store = generateStore();
 
   return (
-    <Provider store ={store}>
+    <Provider store={store}>
       <Pokemones></Pokemones>
     </Provider>
   );
